@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api-consulta-saas
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/consultas-saas
+    username: postgres
+    password: "@Teste"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
