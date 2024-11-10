@@ -1,9 +1,9 @@
 package com.pluranex.api_consulta_saas.adapters.controllers
 
 import com.pluranex.api_consulta_saas.adapters.dtos.PacienteDto
+import com.pluranex.api_consulta_saas.domain.paciente.PacienteService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import com.pluranex.api_consulta_saas.domain.services.PacienteService
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -17,7 +17,7 @@ class PacienteController(private val pacienteService: PacienteService) {
 
     @GetMapping("/{id}")
     fun buscarPaciente(@PathVariable id: Long): PacienteDto? {
-        return pacienteService.buscarPacientePorId(id)?.let { PacienteDto.fromDomain(it) }
+        return pacienteService.buscarPacientePorId(id).let { PacienteDto.fromDomain(it) }
     }
 
     @PostMapping
@@ -28,7 +28,7 @@ class PacienteController(private val pacienteService: PacienteService) {
 
     @PutMapping("/{id}")
     fun atualizarPaciente(@PathVariable id: Long, @RequestBody dto: PacienteDto): PacienteDto? {
-        return pacienteService.atualizarPaciente(id, dto.nome, dto.telefone, dto.email)?.let { PacienteDto.fromDomain(it) }
+        return pacienteService.atualizarPaciente(id, dto.nome, dto.telefone, dto.email).let { PacienteDto.fromDomain(it) }
     }
 
     @DeleteMapping("/{id}")

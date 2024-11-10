@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.adapters.dtos
 
-import com.pluranex.api_consulta_saas.domain.entities.Profissional
+import com.pluranex.api_consulta_saas.domain.profissional.Profissional
 
 data class ProfissionalDto(
     val id: Long?,

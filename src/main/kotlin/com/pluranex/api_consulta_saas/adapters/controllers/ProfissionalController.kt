@@ -19,11 +19,7 @@ class ProfissionalController(private val profissionalService: ProfissionalServic
     @GetMapping("/{id}")
     fun buscarProfissional(@PathVariable id: Long): ResponseEntity<ProfissionalDto> {
         val profissional = profissionalService.buscarProfissionalPorId(id)
-        return if (profissional != null) {
-            ResponseEntity.ok(ProfissionalDto.fromDomain(profissional))
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return ResponseEntity.ok(ProfissionalDto.fromDomain(profissional))
     }
 
     @PostMapping
@@ -49,11 +45,7 @@ class ProfissionalController(private val profissionalService: ProfissionalServic
             telefone = dto.telefone,
             email = dto.email
         )
-        return if (profissionalAtualizado != null) {
-            ResponseEntity.ok(ProfissionalDto.fromDomain(profissionalAtualizado))
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return ResponseEntity.ok(ProfissionalDto.fromDomain(profissionalAtualizado))
     }
 
     @DeleteMapping("/{id}")

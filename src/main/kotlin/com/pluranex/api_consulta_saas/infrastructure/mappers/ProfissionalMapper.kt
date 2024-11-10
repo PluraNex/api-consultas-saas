@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.infrastructure.mappers
 
-import com.pluranex.api_consulta_saas.domain.entities.Profissional
+import com.pluranex.api_consulta_saas.domain.profissional.Profissional
 import com.pluranex.api_consulta_saas.infrastructure.models.ProfissionalModel
 
 object ProfissionalMapper {

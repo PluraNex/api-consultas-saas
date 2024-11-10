@@ -1,15 +1,22 @@
 package com.pluranex.api_consulta_saas.adapters.controllers
 
-import com.pluranex.api_consulta_saas.adapters.dtos.ConsultaDto
+import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaDto
+import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaRequestDto
+import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaUpdateDto
+import com.pluranex.api_consulta_saas.domain.consulta.Consulta
 import com.pluranex.api_consulta_saas.domain.services.ConsultaService
 import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/api/consultas")
-class ConsultaController(private val consultaService: ConsultaService) {
+class ConsultaController(
+    private val consultaService: ConsultaService
+
+) {
 
     @GetMapping
     fun listarConsultas(): ResponseEntity<List<ConsultaDto>> {
@@ -17,24 +24,20 @@ class ConsultaController(private val consultaService: ConsultaService) {
         return ResponseEntity.ok(consultas)
     }
 
-//    @PostMapping
-//    fun criarConsulta(@RequestBody consultaRequest: ConsultaRequestDto): ResponseEntity<ConsultaDto> {
-//        val consulta = consultaService.criarNovaConsulta(
-//            consultaRequest.toDomain()
-//        )
-//        return ResponseEntity.ok(ConsultaDto.fromDomain(consulta))
-//    }
+    @PostMapping
+    fun criarConsulta(@RequestBody consultaRequestDto: ConsultaRequestDto): ResponseEntity<Consulta> {
+        val novaConsulta = consultaService.criarNovaConsulta(consultaRequestDto)
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaConsulta)
+    }
 
-//    @PutMapping("/{consultaId}")
-//    fun atualizarConsulta(
-//        @PathVariable consultaId: Long,
-//        @RequestBody consultaRequest: ConsultaRequestDto
-//    ): ResponseEntity<ConsultaDto> {
-//        val consulta = consultaService.atualizarConsulta(
-//            consultaRequest.toDomain(consultaId)
-//        )
-//        return ResponseEntity.ok(ConsultaDto.fromDomain(consulta))
-//    }
+    @PatchMapping("/{consultaId}")
+    fun atualizarConsultaParcial(
+        @PathVariable consultaId: Long,
+        @RequestBody consultaUpdateDto: ConsultaUpdateDto
+    ): ResponseEntity<ConsultaDto> {
+        val consultaAtualizada = consultaService.atualizarConsulta(consultaId, consultaUpdateDto)
+        return ResponseEntity.ok(ConsultaDto.fromDomain(consultaAtualizada))
+    }
 
     @PutMapping("/{consultaId}/confirmar")
     fun confirmarConsulta(@PathVariable consultaId: Long): ResponseEntity<ConsultaDto> {

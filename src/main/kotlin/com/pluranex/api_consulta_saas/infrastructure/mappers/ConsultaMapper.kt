@@ -1,12 +1,11 @@
 package com.pluranex.api_consulta_saas.infrastructure.mappers
 
-import com.pluranex.api_consulta_saas.domain.entities.Consulta
-import com.pluranex.api_consulta_saas.domain.enums.StatusConsulta
+import com.pluranex.api_consulta_saas.domain.consulta.Consulta
+import com.pluranex.api_consulta_saas.domain.enums.consulta.StatusConsulta
 import com.pluranex.api_consulta_saas.infrastructure.models.ConsultaModel
 
 object ConsultaMapper {
 
-    // Converte de Consulta (domínio) para ConsultaModel (persistência)
     fun toModel(consulta: Consulta): ConsultaModel {
         return ConsultaModel(
             id = consulta.id,
@@ -14,12 +13,10 @@ object ConsultaMapper {
             profissional = ProfissionalMapper.toModel(consulta.profissional),
             dataHorario = consulta.dataHorario,
             status = ConsultaModel.Status.valueOf(consulta.status.name),
-            criadoEm = consulta.criadoEm,
-            atualizadoEm = consulta.atualizadoEm
+            observacoes = consulta.observacoes
         )
     }
 
-    // Converte de ConsultaModel (persistência) para Consulta (domínio)
     fun toDomain(consultaModel: ConsultaModel): Consulta {
         return Consulta(
             id = consultaModel.id,
@@ -27,8 +24,7 @@ object ConsultaMapper {
             profissional = ProfissionalMapper.toDomain(consultaModel.profissional),
             dataHorario = consultaModel.dataHorario,
             status = StatusConsulta.valueOf(consultaModel.status.name),
-            criadoEm = consultaModel.criadoEm,
-            atualizadoEm = consultaModel.atualizadoEm
+            observacoes = consultaModel.observacoes
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.adapters.dtos
 
-import com.pluranex.api_consulta_saas.domain.entities.Paciente
+import com.pluranex.api_consulta_saas.domain.paciente.Paciente
 data class PacienteDto(
     val id: Long?,
     val nome: String,

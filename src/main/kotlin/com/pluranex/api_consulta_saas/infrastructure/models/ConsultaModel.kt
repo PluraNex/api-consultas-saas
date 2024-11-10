@@ -1,6 +1,8 @@
 package com.pluranex.api_consulta_saas.infrastructure.models
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 
@@ -26,11 +28,16 @@ data class ConsultaModel(
     @Column(name = "status", nullable = false)
     var status: Status = Status.PENDENTE,
 
+    @Column(name = "observacoes", length = 500)
+    var observacoes: String? = null,
+
+    @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
     val criadoEm: LocalDateTime = LocalDateTime.now(),
 
+    @UpdateTimestamp
     @Column(name = "atualizado_em", nullable = false)
-    val atualizadoEm: LocalDateTime = LocalDateTime.now()
+    var atualizadoEm: LocalDateTime = LocalDateTime.now()
 ) {
     enum class Status {
         PENDENTE,

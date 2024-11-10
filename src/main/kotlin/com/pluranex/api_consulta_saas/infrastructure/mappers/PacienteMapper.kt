@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.infrastructure.mappers
 
-import com.pluranex.api_consulta_saas.domain.entities.Paciente
+import com.pluranex.api_consulta_saas.domain.paciente.Paciente
 import com.pluranex.api_consulta_saas.infrastructure.models.PacienteModel
 
 object PacienteMapper {

@@ -13,3 +13,19 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+twilio:
+  api:
+    url: https://api.twilio.com
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: DEBUG
