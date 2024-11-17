@@ -1,9 +1,10 @@
 package com.pluranex.api_consulta_saas.infrastructure.mappers
 
+
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.CanalNotificacao
-import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.StatusNotificacao
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.TipoNotificacao
+import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
 import com.pluranex.api_consulta_saas.infrastructure.models.NotificacaoModel
 
 object NotificacaoMapper {
@@ -11,50 +12,32 @@ object NotificacaoMapper {
     fun toModel(notificacao: Notificacao): NotificacaoModel {
         return NotificacaoModel(
             id = notificacao.id,
-            destinatario = notificacao.destinatario,
+            destinatarios = notificacao.destinatarios.mapKeys { it.key.name },
             mensagem = notificacao.mensagem,
             tipo = NotificacaoModel.Tipo.valueOf(notificacao.tipo.name),
             status = toModelStatus(notificacao.status),
-            canal = toModelCanal(notificacao.canal),
-            enviadaEm = notificacao.enviadaEm
+            enviadaEm = notificacao.enviadaEm,
+            configuracao = notificacao.configuracao?.let { ConfiguracaoNotificacaoMapper.toModel(it) }
         )
     }
 
-    fun toDomain(notificacaoModel: NotificacaoModel): Notificacao {
+    fun toDomain(model: NotificacaoModel): Notificacao {
         return Notificacao(
-            id = notificacaoModel.id,
-            destinatario = notificacaoModel.destinatario,
-            mensagem = notificacaoModel.mensagem,
-            tipo = TipoNotificacao.valueOf(notificacaoModel.tipo.name),
-            status = StatusNotificacao.valueOf(notificacaoModel.status.name),
-            canal = CanalNotificacao.valueOf(notificacaoModel.canal.name),
-            enviadaEm = notificacaoModel.enviadaEm
+            id = model.id,
+            destinatarios = model.destinatarios.mapKeys { CanalNotificacao.valueOf(it.key) },
+            mensagem = model.mensagem,
+            tipo = TipoNotificacao.valueOf(model.tipo.name),
+            status = StatusNotificacao.valueOf(model.status.name),
+            enviadaEm = model.enviadaEm,
+            configuracao = model.configuracao?.let { ConfiguracaoNotificacaoMapper.toDomain(it) }
         )
     }
-
 
     fun toModelStatus(status: StatusNotificacao): NotificacaoModel.Status {
         return when (status) {
             StatusNotificacao.PENDENTE -> NotificacaoModel.Status.PENDENTE
             StatusNotificacao.ENVIADA -> NotificacaoModel.Status.ENVIADA
             StatusNotificacao.FALHA -> NotificacaoModel.Status.FALHA
-        }
-    }
-
-    fun toModelCanal(canal: CanalNotificacao): NotificacaoModel.Canal {
-        return when(canal){
-            CanalNotificacao.EMAIL -> NotificacaoModel.Canal.EMAIL
-            CanalNotificacao.SMS -> NotificacaoModel.Canal.SMS
-            CanalNotificacao.WHATSAPP -> NotificacaoModel.Canal.WHATSAPP
-        }
-    }
-
-
-    private fun toDomainStatus(status: NotificacaoModel.Status): StatusNotificacao {
-        return when (status) {
-            NotificacaoModel.Status.PENDENTE -> StatusNotificacao.PENDENTE
-            NotificacaoModel.Status.ENVIADA -> StatusNotificacao.ENVIADA
-            NotificacaoModel.Status.FALHA -> StatusNotificacao.FALHA
         }
     }
 }

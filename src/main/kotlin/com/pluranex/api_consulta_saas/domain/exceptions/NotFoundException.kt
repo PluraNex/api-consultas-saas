@@ -27,8 +27,9 @@ open class NotFoundException constructor(
         // Notificação
 
         NOTIFICACAO_NOT_FOUND(7, "Notificação não encontrada."),
-        NOTIFICACAO_UPDATE_NOT_FOUND(8, "Notificação não encontrada para atualização.");
+        NOTIFICACAO_UPDATE_NOT_FOUND(8, "Notificação não encontrada para atualização."),
 
+        CONFIGURACAO_NOT_FOUND(9, "Configuração não encontrada");
         fun code() = "NOT-%03d".format(code)
     }
 }

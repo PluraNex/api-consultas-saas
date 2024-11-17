@@ -4,7 +4,7 @@ import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaDto
 import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaRequestDto
 import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaUpdateDto
 import com.pluranex.api_consulta_saas.domain.consulta.Consulta
-import com.pluranex.api_consulta_saas.domain.services.ConsultaService
+import com.pluranex.api_consulta_saas.domain.consulta.ConsultaService
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -54,15 +54,6 @@ class ConsultaController(
     @PutMapping("/{consultaId}/finalizar")
     fun finalizarConsulta(@PathVariable consultaId: Long): ResponseEntity<ConsultaDto> {
         val consulta = consultaService.finalizarConsulta(consultaId)
-        return ResponseEntity.ok(ConsultaDto.fromDomain(consulta))
-    }
-
-    @PutMapping("/{consultaId}/remarcar")
-    fun remarcarConsulta(
-        @PathVariable consultaId: Long,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) novaDataHorario: LocalDateTime
-    ): ResponseEntity<ConsultaDto> {
-        val consulta = consultaService.remarcarConsultaComNotificacao(consultaId, novaDataHorario)
         return ResponseEntity.ok(ConsultaDto.fromDomain(consulta))
     }
 

@@ -1,4 +1,4 @@
-package com.pluranex.api_consulta_saas.adapters.dtos
+package com.pluranex.api_consulta_saas.adapters.dtos.paciente
 
 import com.pluranex.api_consulta_saas.domain.paciente.Paciente
 data class PacienteDto(

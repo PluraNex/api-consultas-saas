@@ -1,18 +1,17 @@
 package com.pluranex.api_consulta_saas.domain.notificacao.usercases
 
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.CanalNotificacao
-import com.pluranex.api_consulta_saas.domain.enums.notificacao.StatusNotificacao
-import com.pluranex.api_consulta_saas.domain.exceptions.BusinessException
-import com.pluranex.api_consulta_saas.domain.exceptions.BusinessException.BusinessExceptionType.TIPO_NOTIFICACAO_INVALIDO
 import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException
-import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException.IntegrationExceptionType.API_EXTERNA_INDISPONIVEL
+import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException.IntegrationExceptionType.ERRO_INTEGRACAO_PROVEDOR_NOTIFICACAO
 import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
+import com.pluranex.api_consulta_saas.domain.notificacao.validation.NotificacaoValidator
 import com.pluranex.api_consulta_saas.infrastructure.providers.NotificationProviderFactory
 import org.springframework.stereotype.Component
 
 @Component
 class ReenviarNotificacao(
-    private val providerFactory: NotificationProviderFactory
+    private val providerFactory: NotificationProviderFactory,
+    private val notificacaoValidator: NotificacaoValidator
 ) {
 
     fun executar(
@@ -21,12 +20,7 @@ class ReenviarNotificacao(
         maxAttempts: Int = 3,
         retryDelayMs: Long = 2000
     ) {
-        if (notificacao.status != StatusNotificacao.FALHA) {
-            throw BusinessException(
-                TIPO_NOTIFICACAO_INVALIDO,
-                "A notificação com ID ${notificacao.id} não está em estado de falha para ser reenviada."
-            )
-        }
+        notificacaoValidator.validarStatusParaReenvio(notificacao)
 
         val provider = providerFactory.getProvider(canal)
         var attempt = 0
@@ -39,7 +33,7 @@ class ReenviarNotificacao(
                 attempt++
                 if (attempt >= maxAttempts) {
                     throw IntegrationException(
-                        API_EXTERNA_INDISPONIVEL,
+                        ERRO_INTEGRACAO_PROVEDOR_NOTIFICACAO,
                         "Erro ao integrar com o serviço $canal ao reenviar a notificação com ID ${notificacao.id} após $attempt tentativas: ${e.message}"
                     )
                 }

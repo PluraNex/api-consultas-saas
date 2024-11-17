@@ -3,13 +3,19 @@ package com.pluranex.api_consulta_saas.infrastructure.repositories.notificacao
 import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.StatusNotificacao
 import com.pluranex.api_consulta_saas.domain.notificacao.NotificacaoRepository
+import com.pluranex.api_consulta_saas.domain.notificacao.usercases.CriarNotificacao
 import com.pluranex.api_consulta_saas.infrastructure.mappers.NotificacaoMapper
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Repository
 
 @Repository
 class NotificacaoRepositoryImpl(
     private val notificacaoJpaRepository: NotificacaoJpaRepository
 ) : NotificacaoRepository {
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(CriarNotificacao::class.java)
+    }
 
     override fun buscarNotificacaoPorId(id: Long): Notificacao? {
         return notificacaoJpaRepository.findById(id).orElse(null)?.let { NotificacaoMapper.toDomain(it) }
@@ -21,6 +27,7 @@ class NotificacaoRepositoryImpl(
 
     override fun criarNotificacao(notificacao: Notificacao): Notificacao {
         val model = NotificacaoMapper.toModel(notificacao)
+        logger.info("Destinatários mapeados: ${notificacao.destinatarios}")
         return NotificacaoMapper.toDomain(notificacaoJpaRepository.save(model))
     }
 

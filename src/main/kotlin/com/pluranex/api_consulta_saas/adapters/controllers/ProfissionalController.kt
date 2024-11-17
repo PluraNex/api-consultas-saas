@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.adapters.controllers
 
-import com.pluranex.api_consulta_saas.adapters.dtos.ProfissionalDto
+import com.pluranex.api_consulta_saas.adapters.dtos.profissional.ProfissionalDto
 import com.pluranex.api_consulta_saas.domain.services.ProfissionalService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

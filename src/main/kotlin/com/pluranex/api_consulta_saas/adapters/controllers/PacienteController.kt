@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.adapters.controllers
 
-import com.pluranex.api_consulta_saas.adapters.dtos.PacienteDto
+import com.pluranex.api_consulta_saas.adapters.dtos.paciente.PacienteDto
 import com.pluranex.api_consulta_saas.domain.paciente.PacienteService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

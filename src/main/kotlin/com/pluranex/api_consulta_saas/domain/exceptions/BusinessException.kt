@@ -33,7 +33,18 @@ open class BusinessException constructor(
         LIMITE_ENVIO_EXCEDIDO(12, "O limite de envio de notificações foi excedido."),
         NOTIFICACAO_PENDENTE(13, "A notificação ainda está pendente e não pode ser alterada."),
         FALHA_NO_ENVIO(14, "Falha no envio da notificação. Tente novamente mais tarde."),
-        CANAL_NAO_SUPORTADO(15, "O canal de notificação não é suportado.");
+        FALHA_NO_REENVIO(15, "Falha no reenvio da notificação."),
+        CANAL_NAO_SUPORTADO(16, "O canal de notificação não é suportado."),
+
+        // Exceções relacionadas à configuração de notificação
+
+        CONFIGURACAO_INVALIDA(17, "A configuração da notificação é inválida."),
+        NOTIFICACAO_AUSENTE_PARA_CONFIGURACAO(18, "A notificação está ausente para a configuração solicitada."),
+        CONFIGURACAO_EM_USO(19, "A configuração de notificação está em uso e não pode ser removida."),
+
+        // Nova exceção adicionada para validação de canal ativo
+
+        CANAL_NAO_ATIVO_NA_CONFIGURACAO(20, "O canal de notificação não está ativo na configuração atual.");
 
         fun code() = "BUS-NOT-%03d".format(code)
     }

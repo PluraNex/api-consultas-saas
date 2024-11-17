@@ -3,6 +3,7 @@ package com.pluranex.api_consulta_saas.domain.notificacao.usercases
 import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException
 import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException.IntegrationExceptionType.ERRO_AO_REMOVER_NOTIFICACAO
 import com.pluranex.api_consulta_saas.domain.exceptions.NotFoundException
+import com.pluranex.api_consulta_saas.domain.exceptions.NotFoundException.NotFoundExceptionType.NOTIFICACAO_NOT_FOUND
 import com.pluranex.api_consulta_saas.domain.notificacao.NotificacaoRepository
 import org.springframework.stereotype.Component
 
@@ -14,15 +15,17 @@ class RemoverNotificacao(
     fun executar(id: Long) {
         val notificacao = notificacaoRepository.buscarNotificacaoPorId(id)
             ?: throw NotFoundException(
-                NotFoundException.NotFoundExceptionType.NOTIFICACAO_NOT_FOUND,
+                NOTIFICACAO_NOT_FOUND,
                 "Notificação com ID $id não encontrada."
             )
+
         try {
             notificacaoRepository.removerNotificacao(notificacao.id)
         } catch (e: Exception) {
             throw IntegrationException(
                 ERRO_AO_REMOVER_NOTIFICACAO,
-                "Erro ao remover a notificação com ID $id: ${e.message}"
+                "Erro ao remover a notificação com ID $id: ${e.message}",
+                e
             )
         }
     }

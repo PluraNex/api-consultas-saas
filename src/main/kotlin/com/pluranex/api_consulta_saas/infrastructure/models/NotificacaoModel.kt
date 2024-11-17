@@ -11,8 +11,11 @@ data class NotificacaoModel(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    @Column(nullable = false)
-    val destinatario: String,
+    @ElementCollection
+    @CollectionTable(name = "notificacao_destinatarios", joinColumns = [JoinColumn(name = "notificacao_id")])
+    @MapKeyColumn(name = "canal")
+    @Column(name = "destinatario", nullable = false)
+    val destinatarios: Map<String, String>,
 
     @Column(nullable = false)
     val mensagem: String,
@@ -25,13 +28,14 @@ data class NotificacaoModel(
     @Column(nullable = false)
     var status: Status,
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    val canal: Canal,
-
     @CreationTimestamp
     @Column(name = "enviada_em", updatable = false)
     val enviadaEm: LocalDateTime? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "configuracao_id", referencedColumnName = "id", nullable = true)
+    var configuracao: ConfiguracaoNotificacaoModel? = null
+
 ) {
     enum class Tipo {
         CONFIRMACAO,
@@ -44,11 +48,5 @@ data class NotificacaoModel(
         PENDENTE,
         ENVIADA,
         FALHA
-    }
-
-    enum class Canal {
-        WHATSAPP,
-        EMAIL,
-        SMS
     }
 }

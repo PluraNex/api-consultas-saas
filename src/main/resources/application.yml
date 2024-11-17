@@ -1,31 +1,29 @@
 spring:
   application:
     name: api-consulta-saas
-
   datasource:
-    url: jdbc:postgresql://localhost:5432/consultas-saas
+    url: jdbc:postgresql://localhost:5432/consultas-notificacao-saas
     username: postgres
     password: "@Teste"
     driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 twilio:
-  api:
-    url: https://api.twilio.com
-
+    api:
+      url: https://api.twilio.com
 
 feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
-
-logging:
-  level:
-    org.springframework.cloud.openfeign: DEBUG
+    client:
+      config:
+        default:
+          connectTimeout: 5000
+          readTimeout: 5000
+          loggerLevel: FULL

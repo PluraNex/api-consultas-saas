@@ -5,7 +5,7 @@ import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaUpdateDto
 import com.pluranex.api_consulta_saas.domain.consulta.Consulta
 import com.pluranex.api_consulta_saas.domain.consulta.usercases.*
 import com.pluranex.api_consulta_saas.domain.paciente.PacienteService
-import com.pluranex.api_consulta_saas.domain.services.ConsultaService
+import com.pluranex.api_consulta_saas.domain.consulta.ConsultaService
 import com.pluranex.api_consulta_saas.domain.services.ProfissionalService
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -18,7 +18,6 @@ class ConsultaServiceImpl(
     private val confirmarConsulta: ConfirmarConsulta,
     private val cancelarConsulta: CancelarConsulta,
     private val finalizarConsulta: FinalizarConsulta,
-    private val remarcarConsulta: RemarcarConsulta,
     private val buscarConsulta: BuscarConsulta,
     private val listarConsultasPorPeriodo: ListarConsultasPorPeriodo,
     private val buscarConsultasPorPaciente: BuscarConsultasPorPaciente,
@@ -59,15 +58,6 @@ class ConsultaServiceImpl(
     }
 
     override fun finalizarConsulta(consultaId: Long): Consulta = finalizarConsulta.execute(consultaId)
-
-    override fun remarcarConsultaComNotificacao(consultaId: Long, novaDataHorario: LocalDateTime): Consulta {
-        val consultaRemarcada = remarcarConsulta.execute(consultaId, novaDataHorario)
-
-        // Possível chamada para serviço de notificação
-        // notificacaoService.enviarNotificacaoConfirmacao(consultaRemarcada)
-
-        return consultaRemarcada
-    }
 
     override fun listarConsultasNoPeriodo(start: LocalDateTime, end: LocalDateTime): List<Consulta> =
         listarConsultasPorPeriodo.execute(start, end)

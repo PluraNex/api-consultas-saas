@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class BuscarConsulta(private val consultaRepository: ConsultaRepository) {
-
     fun execute(id: Long): Consulta {
         return consultaRepository.buscarConsultaPorId(id)
             ?: throw NotFoundException(
