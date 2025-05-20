@@ -20,7 +20,12 @@ open class IntegrationException constructor(
         ERRO_AO_ATUALIZAR_CONFIGURACAO(9, "Erro ao atualizar configuração"),
         ERRO_AO_ATUALIZAR_STATUS_NOTIFICACAO(9, "Erro ao atualizar status de notificação"),
         ERRO_AO_REMOVER_CONFIGURACAO(10, "Erro ao remover configuração"),
-        ERRO_AO_BUSCAR_CONFIGURACAO(11, "Erro ao buscar configuração");
+        ERRO_AO_BUSCAR_CONFIGURACAO(11, "Erro ao buscar configuração"),
+        ERRO_AO_CRIAR_EMPRESA_SAUDE(12, "Erro ao criar a empresa de saúde."),
+        ERRO_AO_LISTAR_EMPRESAS(12, "Erro ao listar empresas de saúde.");
+
+
+
         fun code() = "INT-%03d".format(code)
     }
 }

@@ -1,0 +1,6 @@
+# docker/.dockerignore
+**/build
+**/.gradle
+**/out
+**/.idea
+**/*.iml

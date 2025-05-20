@@ -3,7 +3,7 @@ package com.pluranex.api_consulta_saas.application.paciente
 import com.pluranex.api_consulta_saas.domain.paciente.Paciente
 import com.pluranex.api_consulta_saas.domain.exceptions.NotFoundException
 import com.pluranex.api_consulta_saas.domain.paciente.PacienteService
-import com.pluranex.api_consulta_saas.domain.paciente.usercases.*
+import com.pluranex.api_consulta_saas.domain.paciente.usecase.*
 import org.springframework.stereotype.Service
 
 @Service

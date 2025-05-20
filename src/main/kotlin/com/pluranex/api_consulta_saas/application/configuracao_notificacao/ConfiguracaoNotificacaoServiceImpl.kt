@@ -3,7 +3,7 @@ package com.pluranex.api_consulta_saas.application.configuracao_notificacao
 import com.pluranex.api_consulta_saas.adapters.dtos.configuracao_notificacao.ConfiguracaoNotificacaoRequestDto
 import com.pluranex.api_consulta_saas.domain.configuracao_notificacao.ConfiguracaoNotificacao
 import com.pluranex.api_consulta_saas.domain.configuracao_notificacao.ConfiguracaoNotificacaoService
-import com.pluranex.api_consulta_saas.domain.configuracao_notificacao.usecases.*
+import com.pluranex.api_consulta_saas.domain.configuracao_notificacao.usecase.*
 import org.springframework.stereotype.Service
 
 import org.slf4j.Logger

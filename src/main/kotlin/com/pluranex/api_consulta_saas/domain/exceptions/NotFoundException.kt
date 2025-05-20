@@ -29,7 +29,10 @@ open class NotFoundException constructor(
         NOTIFICACAO_NOT_FOUND(7, "Notificação não encontrada."),
         NOTIFICACAO_UPDATE_NOT_FOUND(8, "Notificação não encontrada para atualização."),
 
-        CONFIGURACAO_NOT_FOUND(9, "Configuração não encontrada");
+        CONFIGURACAO_NOT_FOUND(9, "Configuração não encontrada"),
+
+        // Empresa de Saúde
+        EMPRESA_SAUDE_NOT_FOUND(10, "Empresa de saúde não encontrada.");
         fun code() = "NOT-%03d".format(code)
     }
 }

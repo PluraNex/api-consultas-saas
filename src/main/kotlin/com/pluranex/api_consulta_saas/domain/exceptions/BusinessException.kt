@@ -44,8 +44,10 @@ open class BusinessException constructor(
 
         // Nova exceção adicionada para validação de canal ativo
 
-        CANAL_NAO_ATIVO_NA_CONFIGURACAO(20, "O canal de notificação não está ativo na configuração atual.");
+        CANAL_NAO_ATIVO_NA_CONFIGURACAO(20, "O canal de notificação não está ativo na configuração atual."),
 
-        fun code() = "BUS-NOT-%03d".format(code)
+        // Exceções relacionadas a empresas de saúde
+        EMPRESA_NOME_INVALIDO(21, "O nome da empresa de saúde é inválido.");
+        fun code() = "BUS-%03d".format(code)
     }
 }

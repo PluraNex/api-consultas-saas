@@ -1,7 +1,7 @@
 package com.pluranex.api_consulta_saas.application.profissional
 import com.pluranex.api_consulta_saas.domain.exceptions.NotFoundException
 import com.pluranex.api_consulta_saas.domain.profissional.Profissional
-import com.pluranex.api_consulta_saas.domain.profissional.usercases.*
+import com.pluranex.api_consulta_saas.domain.profissional.usecase.*
 import com.pluranex.api_consulta_saas.domain.services.ProfissionalService
 import org.springframework.stereotype.Service
 

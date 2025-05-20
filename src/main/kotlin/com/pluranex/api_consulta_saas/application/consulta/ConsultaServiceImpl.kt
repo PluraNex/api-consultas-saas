@@ -3,7 +3,7 @@ package com.pluranex.api_consulta_saas.application.consulta
 import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaRequestDto
 import com.pluranex.api_consulta_saas.adapters.dtos.consulta.ConsultaUpdateDto
 import com.pluranex.api_consulta_saas.domain.consulta.Consulta
-import com.pluranex.api_consulta_saas.domain.consulta.usercases.*
+import com.pluranex.api_consulta_saas.domain.consulta.usecase.*
 import com.pluranex.api_consulta_saas.domain.paciente.PacienteService
 import com.pluranex.api_consulta_saas.domain.consulta.ConsultaService
 import com.pluranex.api_consulta_saas.domain.services.ProfissionalService

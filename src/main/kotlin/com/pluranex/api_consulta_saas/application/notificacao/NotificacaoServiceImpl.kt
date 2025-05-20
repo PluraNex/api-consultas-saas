@@ -7,7 +7,7 @@ import com.pluranex.api_consulta_saas.domain.enums.notificacao.CanalNotificacao
 import com.pluranex.api_consulta_saas.domain.enums.notificacao.StatusNotificacao
 import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
 import com.pluranex.api_consulta_saas.domain.notificacao.NotificacaoService
-import com.pluranex.api_consulta_saas.domain.notificacao.usercases.*
+import com.pluranex.api_consulta_saas.domain.notificacao.usecase.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
