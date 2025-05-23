@@ -1,0 +1,81 @@
+# Arquivo gerado automaticamente para ambiente local de desenvolvimento
+
+spring:
+  application:
+    name: api-consulta-saas
+
+  profiles:
+    active: loc
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/consultas-notificacao-saas
+    username: postgres
+    password: "@Teste"
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      indent_output: true
+
+  mvc:
+    log-resolved-exception: true
+    problemdetails:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.pluranex: DEBUG
+
+security:
+  jwt:
+    secret: minha-chave-super-secreta
+    issuer: api-consulta-saas
+    expiration-hours: 4
+
+twilio:
+  api:
+    url: https://api.twilio.com
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  error:
+    include-stacktrace: always
+    include-message: always

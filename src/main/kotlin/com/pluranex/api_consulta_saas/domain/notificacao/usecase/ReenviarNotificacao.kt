@@ -5,7 +5,7 @@ import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException
 import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException.IntegrationExceptionType.ERRO_INTEGRACAO_PROVEDOR_NOTIFICACAO
 import com.pluranex.api_consulta_saas.domain.notificacao.Notificacao
 import com.pluranex.api_consulta_saas.domain.notificacao.validation.NotificacaoValidator
-import com.pluranex.api_consulta_saas.infrastructure.providers.NotificationProviderFactory
+import com.pluranex.api_consulta_saas.infrastructure.communication.NotificationProviderFactory
 import org.springframework.stereotype.Component
 
 @Component

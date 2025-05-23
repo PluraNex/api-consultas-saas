@@ -38,3 +38,11 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+# Dotenv – Arquivos de ambiente
+.env
+.env.*
+!.env.example
+
+# Arquivo de configuração local não versionado
+src/main/resources/application-loc.yml
