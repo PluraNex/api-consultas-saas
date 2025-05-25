@@ -19,5 +19,13 @@ enum class Permissao(val dominio: String, val descricao: String) {
     VISUALIZAR_PACIENTE("PACIENTE", "Pode visualizar pacientes"),
     CRIAR_PACIENTE("PACIENTE", "Pode cadastrar novos pacientes"),
     EDITAR_PACIENTE("PACIENTE", "Pode editar pacientes"),
-    EXCLUIR_PACIENTE("PACIENTE", "Pode excluir pacientes")
+    EXCLUIR_PACIENTE("PACIENTE", "Pode excluir pacientes"),
+
+    // ADMIN
+    VISUALIZAR_METRICAS("ADMIN", "Pode visualizar métricas gerais"),
+    VISUALIZAR_TENANTS("ADMIN", "Pode visualizar todos os tenants"),
+    ATUALIZAR_STATUS_TENANT("ADMIN", "Pode ativar ou desativar tenants"),
+    CRIAR_TENANT("ADMIN", "Pode criar tenants manualmente"),
+    ACESSAR_BACKOFFICE("ADMIN", "Acesso à interface administrativa"),
+
 }

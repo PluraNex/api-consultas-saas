@@ -6,9 +6,6 @@ import java.time.LocalDateTime
 
 interface ConsultaJpaRepository : JpaRepository<ConsultaModel, Long> {
     fun findAllByDataHorarioBetween(start: LocalDateTime, end: LocalDateTime): List<ConsultaModel>
-
     fun findAllByPaciente_Id(pacienteId: Long): List<ConsultaModel>
-
-
     fun findAllByProfissional_Id(profissionalId: Long): List<ConsultaModel>
 }

@@ -1,9 +1,9 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.aspect
 
 import com.pluranex.api_consulta_saas.common.annotations.RequirePermission
+import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
 import com.pluranex.api_consulta_saas.domain.exceptions.PermissionException
 import com.pluranex.api_consulta_saas.domain.exceptions.PermissionException.PermissionExceptionType.PERMISSAO_NEGADA
-import common.session.core.SessaoUsuario
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.springframework.security.core.context.SecurityContextHolder

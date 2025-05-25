@@ -4,6 +4,8 @@ plugins {
 	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.6"
 	kotlin("plugin.jpa") version "1.9.25"
+	id("org.jetbrains.dokka") version "1.9.0"
+
 }
 
 group = "com.example"
@@ -59,5 +61,25 @@ tasks.withType<Test> {
 }
 
 tasks.register("setup", scripts.SetupDevEnv::class)
+tasks.register("generateDocs") {
+	dependsOn("dokkaHtml")
+	group = "documentation"
+	description = "Gera a documentação HTML com Dokka"
+}
+tasks.register("generateDocsMd") {
+	dependsOn("dokkaGfm")
+	group = "documentation"
+	description = "Gera documentação em Markdown (GitHub Friendly)"
+}
+
+configurations.all {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "com.fasterxml.jackson.core" && requested.name == "jackson-databind") {
+			useVersion("2.15.3")
+			because("Evita conflito entre Dokka e a versão do Jackson usada pelo Spring Boot")
+		}
+	}
+}
+
 
 

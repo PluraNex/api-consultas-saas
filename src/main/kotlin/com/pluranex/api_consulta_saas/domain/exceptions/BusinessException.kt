@@ -47,7 +47,26 @@ open class BusinessException constructor(
         CANAL_NAO_ATIVO_NA_CONFIGURACAO(20, "O canal de notificação não está ativo na configuração atual."),
 
         // Exceções relacionadas a empresas de saúde
-        EMPRESA_NOME_INVALIDO(21, "O nome da empresa de saúde é inválido.");
+        EMPRESA_NOME_INVALIDO(21, "O nome da empresa de saúde é inválido."),
+
+        // Exceções relacionadas a planos de tenant
+        PLANO_NAO_PERMITIDO(22, "O plano atual não permite acesso a esta funcionalidade."),
+        PLANO_EXPIRADO(23, "O plano contratado está expirado."),
+        PLANO_INATIVO(24, "O plano do tenant está inativo."),
+
+        // Exceções relacionadas a recursos
+        RECURSO_INDISPONIVEL(25, "O recurso necessário não está disponível ou excedeu o limite."),
+        RECURSO_NAO_CONTRATADO(26, "O recurso solicitado não faz parte do plano contratado."),
+        RECURSO_NAO_CONFIGURADO(27, "O recurso solicitado não foi configurado corretamente."),
+        REQUISICAO_EXIGE_IA(28, "A funcionalidade requer um plano com Inteligência Artificial ativada."),
+        REQUISICAO_EXIGE_VIDEOCHAMADA(29, "A funcionalidade requer um plano com suporte a videochamadas."),
+
+        // Exceções relacionadas a feature flags
+        FEATURE_FLAG_CONFIG_INVALIDA(30, "A configuração da feature flag é inválida para o escopo informado.");
+
+
         fun code() = "BUS-%03d".format(code)
+
+        //
     }
 }
