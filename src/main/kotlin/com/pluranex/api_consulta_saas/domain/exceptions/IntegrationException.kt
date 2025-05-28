@@ -24,7 +24,8 @@ open class IntegrationException constructor(
         ERRO_AO_CRIAR_EMPRESA_SAUDE(12, "Erro ao criar a empresa de saúde."),
         ERRO_AO_LISTAR_EMPRESAS(12, "Erro ao listar empresas de saúde."),
         ERRO_AO_ATRIBUIR_PERMISSAO(13, "Erro ao atribuir permissão ao usuário."),
-        ERRO_AO_SALVAR_FEATURE_FLAG(14, "Erro ao salvar o status da feature flag.");
+        ERRO_AO_SALVAR_FEATURE_FLAG(14, "Erro ao salvar o status da feature flag."),
+        ERRO_AO_CRIAR_PROCEDIMENTO(15, "Erro ao criar o procedimento.");
 
 
         fun code() = "INT-%03d".format(code)

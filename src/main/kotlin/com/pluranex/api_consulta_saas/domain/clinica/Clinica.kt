@@ -5,6 +5,7 @@ import com.pluranex.api_consulta_saas.common.types.identidade.Cnpj
 import com.pluranex.api_consulta_saas.common.types.tenant.TenantId
 import com.pluranex.api_consulta_saas.domain.endereco.Endereco
 import com.pluranex.api_consulta_saas.domain.enums.clinica.EspecialidadeClinica
+import com.pluranex.api_consulta_saas.domain.enums.clinica.PerfilClinica
 
 /**
  * Representa uma unidade clínica dentro de um tenant do sistema.
@@ -26,5 +27,6 @@ data class Clinica(
     val cnpj: Cnpj,
     val contato: MeiosContato,
     val endereco: Endereco,
-    val especialidades: List<EspecialidadeClinica>,
+    val perfil: PerfilClinica,
+    val especialidades: List<EspecialidadeClinica>
 )

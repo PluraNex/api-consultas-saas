@@ -1,5 +1,6 @@
 package com.pluranex.api_consulta_saas.common.session.core
 
+import com.pluranex.api_consulta_saas.common.session.core.contexto.ContextoSessao
 import com.pluranex.api_consulta_saas.common.types.tenant.TenantId
 import com.pluranex.api_consulta_saas.common.types.usuario.UserId
 import java.io.Serializable
@@ -30,4 +31,4 @@ data class SessaoUsuario(
     val tenantId: TenantId,
     val perfil: PerfilUsuario,
     val contexto: ContextoSessao
-) : Serializable
+)

@@ -3,6 +3,7 @@ package com.pluranex.api_consulta_saas.infrastructure.security.session.provider
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
 import common.session.core.SessaoUsuario
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value

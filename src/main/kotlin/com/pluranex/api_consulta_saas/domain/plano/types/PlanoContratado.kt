@@ -35,6 +35,6 @@ data class PlanoContratado(
          * @return Instância de [PlanoContratado] com configuração padrão para o plano.
          */
         fun doPlano(plano: PlanoTenant): PlanoContratado =
-            PlanoContratado(plano, PlanoTenantRecursos.recursosPadrao(plano))
+            PlanoContratado(plano, plano.recursosPadrao())
     }
 }

@@ -6,3 +6,19 @@ data class Paciente(
     val telefone: String,
     val email: String?
 )
+
+
+data class Paciente(
+    val id: UUID,
+    val nome: String,
+    val cpf: String,
+    val email: String,
+    val nascimento: LocalDate,
+    val sexo: Sexo,
+    val documentoAlternativo: Documento?,
+    val celular: Telefone,
+    val telefoneFixo: Telefone?,
+    val imagemPerfilUrl: String?,
+    val codigoInterno: String,
+    val privacidadeAtivada: Boolean = false
+)

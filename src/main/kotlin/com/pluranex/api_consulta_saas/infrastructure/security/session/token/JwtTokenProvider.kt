@@ -5,7 +5,8 @@ import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import com.fasterxml.jackson.databind.ObjectMapper
-import common.session.core.SessaoUsuario
+import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
+
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.time.Instant
@@ -28,7 +29,7 @@ class JwtTokenProvider(
 
         return JWT.create()
             .withIssuer(issuer)
-            .withSubject(sessao.userId)
+            .withSubject(sessao.userId.toString())
             .withIssuedAt(Date.from(creationDate()))
             .withExpiresAt(Date.from(expirationDate()))
             .withClaim("sessao", sessaoJson)

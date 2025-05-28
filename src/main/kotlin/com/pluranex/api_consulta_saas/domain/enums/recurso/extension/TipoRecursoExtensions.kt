@@ -1,4 +1,4 @@
-package com.pluranex.api_consulta_saas.domain.enums.recurso.extensions
+package com.pluranex.api_consulta_saas.domain.enums.recurso.extension
 
 import com.pluranex.api_consulta_saas.domain.enums.recurso.TipoRecurso
 import com.pluranex.api_consulta_saas.domain.recurso.types.RecursoLimite

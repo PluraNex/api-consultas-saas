@@ -14,5 +14,6 @@ enum class OrigemPerfil {
     SISTEMA_INTEGRACAO,
     SUPERVISAO,
     DESCONHECIDA,
-    SISTEMA
+    SISTEMA,
+    TRial
 }
