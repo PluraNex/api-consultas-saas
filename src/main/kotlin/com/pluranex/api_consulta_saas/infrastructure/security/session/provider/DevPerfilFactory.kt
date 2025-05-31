@@ -1,10 +1,11 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.session.provider
 
 import com.pluranex.api_consulta_saas.common.session.core.*
-import com.pluranex.api_consulta_saas.common.session.core.contexto.ContextoSessao
+import com.pluranex.api_consulta_saas.common.session.core.contexto.ContextoTecnicoSessao
 import com.pluranex.api_consulta_saas.common.session.enums.*
 import com.pluranex.api_consulta_saas.common.types.parametro.ParametrosSistema
 import com.pluranex.api_consulta_saas.common.types.permissao.PermissoesAtivas
+import com.pluranex.api_consulta_saas.domain.enums.usuario.OrigemPerfil
 
 
 object DevPerfilFactory {
@@ -41,7 +42,7 @@ object DevPerfilFactory {
         ParametroSistema.IA_HABILITADA to "true"
     )
 
-    fun contexto(header: String): ContextoSessao = ContextoSessao(
+    fun contexto(header: String): ContextoTecnicoSessao = ContextoTecnicoSessao(
         permissoes = PermissoesAtivas(permissoes(header)),
         parametros = ParametrosSistema(parametros(header)),
         recursos = RecursosContratados.vazio(),

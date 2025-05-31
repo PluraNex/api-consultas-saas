@@ -2,7 +2,7 @@ package com.pluranex.api_consulta_saas.domain.politica.clinica
 
 import com.pluranex.api_consulta_saas.domain.clinica.Clinica
 import com.pluranex.api_consulta_saas.domain.paciente.Paciente
-import com.pluranex.api_consulta_saas.domain.procedimento.Procedimento
+import com.pluranex.api_consulta_saas.domain.procedimento.entity.Procedimento
 
 /**
  * Define o contrato para regras de negócio específicas aplicáveis a uma [Clinica],

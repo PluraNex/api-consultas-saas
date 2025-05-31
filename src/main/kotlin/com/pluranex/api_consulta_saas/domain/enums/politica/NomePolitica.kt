@@ -8,7 +8,8 @@ enum class NomePolitica(val id: String) {
     DEFAULT("default"),
     INFANTIL("infantil"),
     MULTIDISCIPLINAR("multidisciplinar"),
-    FINANCEIRA_PADRAO("financeira-padrao");
+    FINANCEIRA_PADRAO("financeira-padrao"),
+    PEDIATRIA("pediatria");
 
     override fun toString(): String = id
 }

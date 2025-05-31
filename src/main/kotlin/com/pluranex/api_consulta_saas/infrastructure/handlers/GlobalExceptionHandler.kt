@@ -1,5 +1,6 @@
 package com.pluranex.api_consulta_saas.infrastructure.handlers
 
+import com.pluranex.api_consulta_saas.domain.exceptions.AuthException
 import com.pluranex.api_consulta_saas.domain.exceptions.BusinessException
 import com.pluranex.api_consulta_saas.domain.exceptions.NotFoundException
 import com.pluranex.api_consulta_saas.domain.exceptions.IntegrationException
@@ -85,6 +86,36 @@ class GlobalExceptionHandler {
                     timestamp = LocalDateTime.now(),
                     status = HttpStatus.FORBIDDEN.value(),
                     error = ex.message ?: "Acesso negado.",
+                )
+            )
+    }
+
+    @ExceptionHandler(AuthException::class)
+    fun handleAuthException(
+        ex: AuthException,
+        request: HttpServletRequest
+    ): ResponseEntity<ApiErrorResponse> {
+        val headers = HttpHeaders()
+        headers.add("X-Error-Code", ex.errorCode)
+
+        val status = when (ex.type) {
+            AuthException.AuthExceptionType.TOKEN_INVALIDO,
+            AuthException.AuthExceptionType.TOKEN_AUSENTE,
+            AuthException.AuthExceptionType.TOKEN_EXPIRADO -> HttpStatus.UNAUTHORIZED
+
+            AuthException.AuthExceptionType.USUARIO_NAO_AUTENTICADO,
+            AuthException.AuthExceptionType.PERFIL_INVALIDO -> HttpStatus.FORBIDDEN
+
+            else -> HttpStatus.UNAUTHORIZED
+        }
+
+        return ResponseEntity.status(status)
+            .headers(headers)
+            .body(
+                ApiErrorResponse(
+                    timestamp = LocalDateTime.now(),
+                    status = status.value(),
+                    error = ex.message ?: "Falha de autenticação.",
                 )
             )
     }

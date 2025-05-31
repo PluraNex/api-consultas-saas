@@ -1,7 +1,8 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.filter
 
+import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
+import com.pluranex.api_consulta_saas.domain.exceptions.AuthException
 import com.pluranex.api_consulta_saas.infrastructure.security.session.token.JwtTokenProvider
-import common.session.core.SessaoUsuario
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -22,27 +23,27 @@ class JwtAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val token = extractToken(request)
+        try {
+            val token = extractTokenOrThrow(request)
+            val sessaoUsuario: SessaoUsuario = jwtTokenProvider.getAuthentication(token)
 
-        if (token != null) {
-            try {
-                val sessaoUsuario: SessaoUsuario = jwtTokenProvider.getAuthentication(token)
-                val authentication = UsernamePasswordAuthenticationToken(sessaoUsuario, null, emptyList())
-
-                SecurityContextHolder.getContext().authentication = authentication
-            } catch (e: Exception) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido ou expirado")
-                return
-            }
+            val authentication = UsernamePasswordAuthenticationToken(sessaoUsuario, null, emptyList())
+            SecurityContextHolder.getContext().authentication = authentication
+        } catch (ex: AuthException) {
+            // Exceções semânticas lançadas de propósito, serão capturadas pelo GlobalExceptionHandler
+            throw ex
+        } catch (ex: Exception) {
+            // Qualquer outra falha não esperada será tratada como falha genérica de autenticação
+            throw AuthException(AuthException.AuthExceptionType.FALHA_AUTENTICACAO, cause = ex)
         }
 
         filterChain.doFilter(request, response)
     }
 
-    private fun extractToken(request: HttpServletRequest): String? {
-        val header = request.getHeader("Authorization")
-        return if (!header.isNullOrEmpty() && header.startsWith("Bearer ")) {
-            header.substring(7)
-        } else null
+    private fun extractTokenOrThrow(request: HttpServletRequest): String {
+        return request.getHeader("Authorization")
+            ?.takeIf { it.startsWith("Bearer ") }
+            ?.substring(7)
+            ?: throw AuthException(AuthException.AuthExceptionType.TOKEN_AUSENTE)
     }
 }

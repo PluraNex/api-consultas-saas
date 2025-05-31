@@ -1,7 +1,6 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.session.provider
 
 import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
-import common.session.core.SessaoUsuario
 import jakarta.servlet.http.HttpServletRequest
 
 /**

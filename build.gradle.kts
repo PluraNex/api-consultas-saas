@@ -1,11 +1,10 @@
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
+	kotlin("plugin.jpa") version "1.9.25"
 	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.6"
-	kotlin("plugin.jpa") version "1.9.25"
 	id("org.jetbrains.dokka") version "1.9.0"
-
 }
 
 group = "com.example"
@@ -24,6 +23,7 @@ repositories {
 extra.set("springCloudVersion", "2023.0.3")
 
 dependencies {
+	// === App ===
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
@@ -31,11 +31,20 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("com.auth0:java-jwt:4.4.0")
+
+	// === Runtime ===
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// === Testes ===
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(group = "org.mockito") // Exclui Mockito
+	}
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	testImplementation("io.mockk:mockk:1.13.10") // MockK para Kotlin
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
 dependencyManagement {
@@ -61,11 +70,13 @@ tasks.withType<Test> {
 }
 
 tasks.register("setup", scripts.SetupDevEnv::class)
+
 tasks.register("generateDocs") {
 	dependsOn("dokkaHtml")
 	group = "documentation"
 	description = "Gera a documentação HTML com Dokka"
 }
+
 tasks.register("generateDocsMd") {
 	dependsOn("dokkaGfm")
 	group = "documentation"
@@ -80,6 +91,3 @@ configurations.all {
 		}
 	}
 }
-
-
-

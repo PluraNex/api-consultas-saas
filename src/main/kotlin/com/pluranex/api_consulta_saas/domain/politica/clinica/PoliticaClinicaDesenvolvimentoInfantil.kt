@@ -6,7 +6,7 @@ import com.pluranex.api_consulta_saas.domain.enums.politica.NomePolitica
 import com.pluranex.api_consulta_saas.domain.enums.politica.TipoPolitica
 import com.pluranex.api_consulta_saas.domain.enums.procedimento.TipoProcedimento
 import com.pluranex.api_consulta_saas.domain.paciente.Paciente
-import com.pluranex.api_consulta_saas.domain.procedimento.Procedimento
+import com.pluranex.api_consulta_saas.domain.procedimento.entity.Procedimento
 import org.springframework.stereotype.Component
 
 /**

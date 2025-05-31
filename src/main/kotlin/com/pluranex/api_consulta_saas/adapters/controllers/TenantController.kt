@@ -3,7 +3,7 @@ package com.pluranex.api_consulta_saas.adapters.controllers
 import com.pluranex.api_consulta_saas.adapters.dtos.tenant.TenantRequestDto
 import com.pluranex.api_consulta_saas.adapters.dtos.tenant.TenantResponseDto
 import com.pluranex.api_consulta_saas.common.annotations.RequirePermission
-import com.pluranex.api_consulta_saas.common.session.enums.Permissao
+import com.pluranex.api_consulta_saas.domain.enums.permissao.Permissao
 import com.pluranex.api_consulta_saas.domain.tenant.TenantService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

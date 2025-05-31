@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTVerificationException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
+import com.pluranex.api_consulta_saas.domain.exceptions.AuthException
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -42,9 +43,9 @@ class JwtTokenProvider(
             val json = jwt.getClaim("sessao").asString()
             return objectMapper.readValue(json, SessaoUsuario::class.java)
         } catch (ex: JWTVerificationException) {
-            throw RuntimeException("Token JWT inválido ou expirado", ex)
+            throw AuthException(AuthException.AuthExceptionType.TOKEN_INVALIDO, cause = ex)
         } catch (ex: Exception) {
-            throw RuntimeException("Erro ao desserializar sessão", ex)
+            throw AuthException(AuthException.AuthExceptionType.ERRO_DESSERIALIZAR_SESSAO, cause = ex)
         }
     }
 

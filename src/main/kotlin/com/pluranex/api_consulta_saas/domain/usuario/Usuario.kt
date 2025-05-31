@@ -1,12 +1,13 @@
 package com.pluranex.api_consulta_saas.domain.usuario
 
-import com.pluranex.api_consulta_saas.common.session.core.PerfilUsuario
+import com.pluranex.api_consulta_saas.common.types.usuario.UserId
 import com.pluranex.api_consulta_saas.domain.contato.MeiosContato
+import com.pluranex.api_consulta_saas.domain.enums.usuario.PerfilUsuario
 import com.pluranex.api_consulta_saas.domain.permissao.PermissaoUsuario
 import java.time.LocalDateTime
 
 data class Usuario(
-    val id: Long? = null,
+    val id: UserId?,
     val nome: String,
     val contato: MeiosContato,
     val senhaHash: String,

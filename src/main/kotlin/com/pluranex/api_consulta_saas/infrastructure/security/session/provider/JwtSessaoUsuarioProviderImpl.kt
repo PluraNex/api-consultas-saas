@@ -1,10 +1,11 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.session.provider
 
 import com.auth0.jwt.JWT
+import com.auth0.jwt.exceptions.JWTVerificationException
 import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
-import common.session.core.SessaoUsuario
+import com.pluranex.api_consulta_saas.domain.exceptions.AuthException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Profile
@@ -22,11 +23,20 @@ class JwtSessaoUsuarioProviderImpl(
         val token = request.getHeader("Authorization")
             ?.takeIf { it.startsWith("Bearer ") }
             ?.substring(7)
-            ?: throw RuntimeException("Token não encontrado no header Authorization")
+            ?: throw AuthException(AuthException.AuthExceptionType.TOKEN_AUSENTE)
 
-        val jwt = JWT.require(Algorithm.HMAC256(secret)).withIssuer(issuer).build().verify(token)
-        val json = jwt.getClaim("sessao").asString()
+        return try {
+            val jwt = JWT.require(Algorithm.HMAC256(secret))
+                .withIssuer(issuer)
+                .build()
+                .verify(token)
 
-        return objectMapper.readValue(json, SessaoUsuario::class.java)
+            val json = jwt.getClaim("sessao").asString()
+            objectMapper.readValue(json, SessaoUsuario::class.java)
+        } catch (ex: JWTVerificationException) {
+            throw AuthException(AuthException.AuthExceptionType.TOKEN_INVALIDO, cause = ex)
+        } catch (ex: Exception) {
+            throw AuthException(AuthException.AuthExceptionType.ERRO_DESSERIALIZAR_SESSAO, cause = ex)
+        }
     }
 }

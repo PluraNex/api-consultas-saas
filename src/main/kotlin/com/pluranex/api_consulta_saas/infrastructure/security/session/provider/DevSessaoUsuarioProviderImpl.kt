@@ -1,6 +1,6 @@
 package com.pluranex.api_consulta_saas.infrastructure.security.session.provider
 
-import common.session.core.SessaoUsuario
+import com.pluranex.api_consulta_saas.common.session.core.SessaoUsuario
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component

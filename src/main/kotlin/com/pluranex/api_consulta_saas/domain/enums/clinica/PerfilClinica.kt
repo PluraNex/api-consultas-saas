@@ -38,6 +38,12 @@ PerfilClinica(val descricao: String) {
      */
     CARDIOLOGIA("Clínica de Cardiologia"),
 
+
+    /**
+     * Clínica especializada em pediatria e saude da criança.
+     */
+    PEDIATRIA("Clínica Pediátrica"),
+
     /**
      * Clínica voltada à terceira idade, com foco em saúde geriátrica e suporte a pacientes idosos.
      */
